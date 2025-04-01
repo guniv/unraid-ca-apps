@@ -13,7 +13,7 @@
 &#xD;
 It is recommended you run CoolerControl in privileged mode initially to allow it to discover devices on your system. Once you know the devices and the locations it lists when you select them, you can mount them to this container and disable privileged mode.&#xD;
 &#xD;
-Please note that CoolerControl does not currently support reading temperatures from SMART data and thus can't be used to link fans to HDD temperatures. It does support NVMe temperature monitoring.
+To monitor drive temperatures in CoolerControl, you need to enable a kernel module on your Unraid system that reports the drive temperatures to HWMon, which CoolerControl uses to get system information. To enable the module, run "sudo modprobe drivetemp" in your Unraid system's console. I recommend setting up a user script that runs this command when your array starts.&#xD;
 &#xD;
 If your system has Nvidia GPUs, you can allow CoolerControl to access them by adding "--runtime=nvidia --gpus=all" to the extra parameters for the container under the advanced view configuration.&#xD;
 &#xD;
