@@ -9,7 +9,7 @@
   <Privileged>false</Privileged>
   <Support>https://forums.unraid.net/topic/188566-support-coolercontrol-in-docker/</Support>
   <Project>https://gitlab.com/coolercontrol/coolercontrol</Project>
-  <Overview>CoolerControl is a feature-rich cooling device control and monitoring application for Linux. This container is an unofficial version that runs it in Docker. Please note that&#xD;
+  <Overview>CoolerControl is a feature-rich cooling device control and monitoring application for Linux. This container is an unofficial version that runs it in Docker.&#xD;
 &#xD;
 It is recommended you run CoolerControl in privileged mode initially to allow it to discover devices on your system. Once you know the devices and the locations it lists when you select them, you can mount them to this container and disable privileged mode.&#xD;
 &#xD;
