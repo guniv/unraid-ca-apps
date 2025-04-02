@@ -15,7 +15,7 @@ It is recommended you run CoolerControl in privileged mode initially to allow it
 &#xD;
 To monitor drive temperatures in CoolerControl, you need to enable a kernel module on your Unraid system that reports the drive temperatures to HWMon, which CoolerControl uses to get system information. To enable the module, run "sudo modprobe drivetemp" in your Unraid system's console. I recommend setting up a user script that runs this command when your array starts.&#xD;
 &#xD;
-If your system has Nvidia GPUs, you can allow CoolerControl to access them by adding "--runtime=nvidia --gpus=all" to the extra parameters for the container under the advanced view configuration.&#xD;
+If your system has Nvidia GPUs, you can allow CoolerControl to access them by adding "--runtime=nvidia --gpus=all" to the extra parameters for the container under the advanced view configuration. I currently haven't found a way to allow CoolerControl to control GPU fans without leaving the container in privileged mode.&#xD;
 &#xD;
 If your system fans are not showing up, you can try installing the ITE IT87 Driver plugin.</Overview>
   <Category>Drivers: Tools:</Category>
