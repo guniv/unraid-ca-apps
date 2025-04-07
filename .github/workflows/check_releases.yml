@@ -1,0 +1,35 @@
+name: Check for New Releases
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Daily at 12pm UTC
+  workflow_dispatch:  # Allow manual runs
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo B
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Run update script
+      run: |
+        python3 .github/scripts/update_from_releases.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Commit and push changes
+      if: success()
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add CoolerControl.xml
+        git add .last_release
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update to ${{ github.event.release.tag_name }}"; git push)
