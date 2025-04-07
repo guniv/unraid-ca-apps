@@ -4,27 +4,21 @@
   <Repository>ghcr.io/guniv/coolercontrol-docker</Repository>
   <Registry>https://github.com/guniv/CoolerControl-Docker</Registry>
   <Network>bridge</Network>
-  <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://forums.unraid.net/topic/188566-support-coolercontrol-in-docker/</Support>
   <Project>https://gitlab.com/coolercontrol/coolercontrol</Project>
+  <ReadMe>https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md</ReadMe>
   <Overview>CoolerControl is a feature-rich fan and RGB control and monitoring application for Linux. This container is an unofficial version that runs it in Docker.&#xD;
 &#xD;
 Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for information on setting this container up properly.</Overview>
+  <Screenshot>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/screenshots/coolercontrol-overview.png</Screenshot>
+  <Screenshot>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/screenshots/coolercontrol-speed.png</Screenshot>
+  <Screenshot>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/screenshots/coolercontrol-lighting.png</Screenshot>
   <Category>Drivers: Tools:</Category>
   <WebUI>http://[IP]:[PORT:11987]/</WebUI>
-  <TemplateURL/>
-  <Icon>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/coolercontrol/icons/icon.png</Icon>
-  <ExtraParams/>
-  <PostArgs/>
-  <CPUset/>
-  <DateInstalled>1743046891</DateInstalled>
-  <DonateText/>
-  <DonateLink/>
-  <Requires/>
+  <Icon>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/coolercontrol/icons/Square310x310Logo.png</Icon>
   <Config Name="CoolerControl configuration" Target="/etc/coolercontrol" Default="/mnt/user/appdata/coolercontrol" Mode="rw" Description="This is where configuration files are stored for CoolerControl. This allows settings to persist." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/coolercontrol</Config>
   <Config Name="WebUI port" Target="11987" Default="11987" Mode="tcp" Description="This port is where the CoolerControl WebUI can be accessed." Type="Port" Display="always" Required="true" Mask="false">11987</Config>
   <Config Name="HWMon" Target="/sys/class/hwmon" Default="/sys/class/hwmon" Mode="ro" Description="This exposes your hardware sensors to CoolerControl with read-only access." Type="Path" Display="advanced" Required="true" Mask="false">/sys/class/hwmon</Config>
-  <TailscaleStateDir/>
 </Container>
