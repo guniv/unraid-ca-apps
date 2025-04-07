@@ -23,6 +23,7 @@ Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for infor
   <Config Name="HWMon" Target="/sys/class/hwmon" Default="/sys/class/hwmon" Mode="ro" Description="This exposes your hardware sensors to CoolerControl with read-only access." Type="Path" Display="advanced" Required="true" Mask="false">/sys/class/hwmon</Config>
   <Changes>### 2025.04.05
 - CoolerControl release 2.1.0
-### 2025.04.01
-- Initial Release</Changes>
+### 2025.03.31
+- Initial release
+- CoolerControl release 2.0.1</Changes>
 </Container>
