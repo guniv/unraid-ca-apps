@@ -8,11 +8,13 @@ on:
 jobs:
   check-updates:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout Repo B
       uses: actions/checkout@v4
       with:
-        persist-credentials: false
+        fetch-depth: 0  # Optional: Fetches all history for all branches
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -33,6 +35,10 @@ jobs:
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
-        git add CoolerControl.xml
-        git add .last_release
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Update to latest release"; git push)
+        git add CoolerControl.xml .last_release
+        git diff --quiet && git diff --staged --quiet || (
+          git commit -m "Update to latest release"
+          git push
+        )
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
