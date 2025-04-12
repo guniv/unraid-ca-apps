@@ -21,7 +21,7 @@ Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for infor
   <Config Name="CoolerControl configuration" Target="/etc/coolercontrol" Default="/mnt/user/appdata/coolercontrol" Mode="rw" Description="This is where configuration files are stored for CoolerControl. This allows settings to persist." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/coolercontrol</Config>
   <Config Name="WebUI port" Target="11987" Default="11987" Mode="tcp" Description="This port is where the CoolerControl WebUI can be accessed." Type="Port" Display="always" Required="true" Mask="false">11987</Config>
   <Config Name="HWMon" Target="/sys/class/hwmon" Default="/sys/class/hwmon" Mode="ro" Description="This exposes your hardware sensors to CoolerControl with read-only access." Type="Path" Display="advanced" Required="true" Mask="false">/sys/class/hwmon</Config>
-  <Changes>### 2025.04.12 (2.1.0-docker1)
+  <Changes># 2025.04.12 (2.1.0)
 ## CoolerControl Changes
 ### Added
 - New Icons including symbolic icon
@@ -47,14 +47,8 @@ Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for infor
 - Issue where changing the Profile Type didn't count towards unsaved changes
 - Minimum Profiles reqiured for Mix Profiles are now properly evaluated
 
-
 [View full release notes](https://gitlab.com/coolercontrol/coolercontrol/-/releases/2.1.0)
 
-
-
-### 2025.04.05
-- CoolerControl release 2.1.0
-### 2025.03.31
-- Initial release
-- CoolerControl release 2.0.1</Changes>
+# 2025.03.31 (2.0.1)
+- Initial release</Changes>
 </Container>
