@@ -2,6 +2,7 @@ import requests
 import re
 import os
 from xml.sax.saxutils import escape
+from datetime import date  # Add this import
 
 REPO_A = "guniv/CoolerControl-Docker"  # Your source repo
 LAST_TAG_FILE = ".last_release"
@@ -12,11 +13,14 @@ def get_latest_release():
     response.raise_for_status()
     return response.json()
 
+
 def update_xml(tag_name, body):
     with open('CoolerControl.xml', 'r') as f:
         xml_content = f.read()
 
-    new_entry = f"### {tag_name}\n{escape(body)}"
+    # Get current date in YYYY.MM.DD format
+    current_date = date.today().strftime("%Y.%m.%d")  
+    new_entry = f"### {current_date} ({tag_name})\n{escape(body)}"  
     
     # Find existing Changes section or create new one
     changes_pattern = re.compile(r'<Changes>(.*?)</Changes>', re.DOTALL)
