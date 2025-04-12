@@ -2,9 +2,9 @@ import requests
 import re
 import os
 from xml.sax.saxutils import escape
-from datetime import date  # Add this import
+from datetime import date
 
-REPO_A = "guniv/CoolerControl-Docker"  # Your source repo
+REPO_A = "guniv/CoolerControl-Docker"
 LAST_TAG_FILE = ".last_release"
 
 def get_latest_release():
@@ -13,16 +13,14 @@ def get_latest_release():
     response.raise_for_status()
     return response.json()
 
-
-def update_xml(tag_name, body):
+def update_xml(release_name, tag_name, body):
     with open('CoolerControl.xml', 'r') as f:
         xml_content = f.read()
 
-    # Get current date in YYYY.MM.DD format
-    current_date = date.today().strftime("%Y.%m.%d")  
-    new_entry = f"### {current_date} ({tag_name})\n{escape(body)}"  
+    current_date = date.today().strftime("%Y.%m.%d")
+    # Use # for main header and preserve existing markdown levels in body
+    new_entry = f"# {current_date} ({release_name})\n{escape(body)}"
     
-    # Find existing Changes section or create new one
     changes_pattern = re.compile(r'<Changes>(.*?)</Changes>', re.DOTALL)
     match = changes_pattern.search(xml_content)
     
@@ -36,22 +34,22 @@ def update_xml(tag_name, body):
         f.write(new_xml)
 
 def main():
-    # Get stored last processed tag
     last_tag = ""
     if os.path.exists(LAST_TAG_FILE):
         with open(LAST_TAG_FILE, 'r') as f:
             last_tag = f.read().strip()
     
-    # Get latest release from Repo A
     release = get_latest_release()
+    tag_name = release['tag_name']
+    # Use release name if available, fallback to tag name
+    release_name = release.get('name') or tag_name
     
-    if release['tag_name'] != last_tag:
-        print(f"New release detected: {release['tag_name']}")
-        update_xml(release['tag_name'], release['body'])
+    if tag_name != last_tag:
+        print(f"New release detected: {tag_name}")
+        update_xml(release_name, tag_name, release['body'])
         
-        # Update last processed tag
         with open(LAST_TAG_FILE, 'w') as f:
-            f.write(release['tag_name'])
+            f.write(tag_name)
             
         return True
     return False
