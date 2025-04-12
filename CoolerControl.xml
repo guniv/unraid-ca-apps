@@ -25,10 +25,10 @@ Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for infor
 ## CoolerControl Changes
 ### Added
 - New Icons including symbolic icon
-- Zero RPM feature support for RDNA3/4 AMD GPU fan control - kernel version dependant (#386)
+- Zero RPM feature support for RDNA3/4 AMD GPU fan control - kernel version dependant
 - Improved RDNA3/4 AMD GPU support, logs and docs
 - Nvidia fan RPM support - upstream work
-- Support for general HWMon device Power metrics (watts) (#422)
+- Support for general HWMon device Power metrics (watts)
 - Full-screen support for Web UI &amp; Desktop app
 - Full-Page feature for Dashboards
 - Enhanced system information logs by default
@@ -41,7 +41,7 @@ Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for infor
 - Dependencies updated
 - Build pipeline updates
 ### Fixed
-- Issue when setting AseTek AIOs as either modern or legacy versions (#421)
+- Issue when setting AseTek AIOs as either modern or legacy versions
 - Handling for devices that do not have a writable pwmN_enable for fan control
 - Issue on some systems with socket connection issues (#424)
 - Issue where changing the Profile Type didn't count towards unsaved changes
