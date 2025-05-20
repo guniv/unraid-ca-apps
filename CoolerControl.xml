@@ -11,7 +11,9 @@
   <ReadMe>https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md</ReadMe>
   <Overview>CoolerControl is a feature-rich fan and RGB control and monitoring application for Linux. This container is an unofficial version that runs it in Docker.&#xD;
 &#xD;
-Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for information on setting this container up properly.</Overview>
+Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for information on setting this container up properly.
+&#xD;
+You may encounter issues setting up this container on Unraid versions below 7.0.</Overview>
   <Screenshot>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/screenshots/coolercontrol-overview.png</Screenshot>
   <Screenshot>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/screenshots/coolercontrol-speed.png</Screenshot>
   <Screenshot>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/screenshots/coolercontrol-lighting.png</Screenshot>
