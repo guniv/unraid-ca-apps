@@ -23,7 +23,37 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl configuration" Target="/etc/coolercontrol" Default="/mnt/user/appdata/coolercontrol" Mode="rw" Description="This is where configuration files are stored for CoolerControl. This allows settings to persist." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/coolercontrol</Config>
   <Config Name="WebUI port" Target="11987" Default="11987" Mode="tcp" Description="This port is where the CoolerControl WebUI can be accessed." Type="Port" Display="always" Required="true" Mask="false">11987</Config>
   <Config Name="HWMon" Target="/sys/class/hwmon" Default="/sys/class/hwmon" Mode="ro" Description="This exposes your hardware sensors to CoolerControl with read-only access." Type="Path" Display="advanced" Required="true" Mask="false">/sys/class/hwmon</Config>
-  <Changes># 2025.04.12 (2.1.0)
+  <Changes># 2025.06.01 (2.2.0)
+## CoolerControl Changes
+### Added
+- Support for older Intel CPUs (#437)
+- Support for liquidctl MPGCooler driver (#436)
+- Support for liquidctl AsusRyujin driver (#441)
+- Support for liquidctl Coolit Hydro GT driver (#442)
+- Zero Temperature Drive Power State (#443)
+- Project Vision document
+- International Language support i18n (!296 @kuilei0926)
+- Fan control and entity creation wizards
+### Changed
+- Dependencies updated
+- Reduce log level for drivetemp slow devices
+- Improved code documentation and log messages
+- Various minor implementation improvements
+- UI Refresh no longer needed for theme changes (!296 @kuilei0926)
+- Load libdrm_amdgpu dynamically
+### Fixed
+- Added liquidctl initialization retries and max startup delay (#438)
+- Badge links in docs (!304 @pallaswept)
+- Daemon crash in some rare situations
+- Minor OpenAPI documentation (!301 @caferen)
+- Missing metrics for single Dashboards
+- Long float values in Alert logs
+
+
+[View full release notes](https://gitlab.com/coolercontrol/coolercontrol/-/releases/2.2.0)
+
+
+# 2025.04.12 (2.1.0)
 ## CoolerControl Changes
 ### Added
 - New Icons including symbolic icon
