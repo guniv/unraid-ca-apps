@@ -23,7 +23,23 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl configuration" Target="/etc/coolercontrol" Default="/mnt/user/appdata/coolercontrol" Mode="rw" Description="This is where configuration files are stored for CoolerControl. This allows settings to persist." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/coolercontrol</Config>
   <Config Name="WebUI port" Target="11987" Default="11987" Mode="tcp" Description="This port is where the CoolerControl WebUI can be accessed." Type="Port" Display="always" Required="true" Mask="false">11987</Config>
   <Config Name="HWMon" Target="/sys/class/hwmon" Default="/sys/class/hwmon" Mode="ro" Description="This exposes your hardware sensors to CoolerControl with read-only access." Type="Path" Display="advanced" Required="true" Mask="false">/sys/class/hwmon</Config>
-  <Changes># 2025.06.01 (2.2.0)
+  <Changes># 2025.06.15 (2.2.1)
+## CoolerControl Changes
+### Added
+- Improved security and quality checks for the GitLab CI Pipeline
+### Changed
+- Improved test coverage for main control engine
+- Updated copyright year
+### Fixed
+- Disabled support for AsusRyujin liquidctl driver (#457)
+### Security
+- Vulnerability issue with dependency
+
+
+[View full release notes](https://gitlab.com/coolercontrol/coolercontrol/-/releases/2.2.1)
+
+
+# 2025.06.01 (2.2.0)
 ## CoolerControl Changes
 ### Added
 - Support for older Intel CPUs (#437)
