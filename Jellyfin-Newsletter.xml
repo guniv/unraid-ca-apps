@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Jellyfin-Newsletter</Name>
+  <Repository>ghcr.io/seaweedbraincy/jellyfin-newsletter:latest</Repository>
+  <Registry>https://github.com/SeaweedbrainCY/jellyfin-newsletter/pkgs/container/jellyfin-newsletter</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Project>https://github.com/SeaweedbrainCY/jellyfin-newsletter</Project>
+  <Overview>A newsletter for Jellyfin to notify your users of your latest additions. Jellyfin Newsletter connects to the Jellyfin API to retrieve recently added items and send them to your users.
+&#xD;
+It is fully customizable and can be run on a schedule using a cron job or a task scheduler.</Overview>
+  <Screenshot>https://raw.githubusercontent.com/SeaweedbrainCY/jellyfin-newsletter/refs/heads/main/assets/new_media_notification_preview.png</Screenshot>
+  <Category>MediaServer:Other</Category>
+  <Icon>https://raw.githubusercontent.com/SeaweedbrainCY/jellyfin-newsletter/refs/heads/main/assets/jellyfin_newsletter.png</Icon>
+  <Config Name="Configuration" Target="/app/config" Default="/mnt/user/appdata/jellyfin-newsletter/" Mode="rw" Description="This is where the config file for Jellyfin Newsletter is stored. Edit the config.yml in this folder." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/jellyfin-newsletter/</Config>
+  <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
+  <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
+  <Changes># 2025.07.01 (0.6.0)
+- Initial UNRAID template release</Changes>
+</Container>

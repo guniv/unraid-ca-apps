@@ -24,9 +24,15 @@ jobs:
     - name: Install dependencies
       run: pip install requests
 
-    - name: Run update script
+    - name: Run update script for CoolerControl
       run: |
-        python3 .github/scripts/update_from_releases.py
+        python3 .github/scripts/update_from_releases.py --repo guniv/CoolerControl-Docker --xml CoolerControl.xml --last .last_release_coolercontrol
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Run update script for Jellyfin-Newsletter
+      run: |
+        python3 .github/scripts/update_from_releases.py --repo SeaweedbrainCY/jellyfin-newsletter --xml Jellyfin-Newsletter.xml --last .last_release_jellyfin_newsletter
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -35,9 +41,9 @@ jobs:
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
-        git add CoolerControl.xml .last_release
+        git add CoolerControl.xml Jellyfin-Newsletter.xml .last_release_coolercontrol .last_release_jellyfin_newsletter
         git diff --quiet && git diff --staged --quiet || (
-          git commit -m "Update to latest release"
+          git commit -m "Update to latest release(s)"
           git push
         )
       env:
