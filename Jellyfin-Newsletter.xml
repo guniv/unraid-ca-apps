@@ -16,48 +16,6 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Configuration" Target="/app/config" Default="/mnt/user/appdata/jellyfin-newsletter/" Mode="rw" Description="This is where the config file for Jellyfin Newsletter is stored. Edit the config.yml in this folder." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/jellyfin-newsletter/</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.07.01 (v0.6.0)
-&gt; [!Important]
-&gt; This release introduces **breaking changes**
-&gt;  Carefully read the upgrade notes.
-
-## 🐳 New docker images 
-This release is available in the following tags : `v0.6`, `v0.6.0` and `latest`
-**Recommended tag :**
-- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.6`
-
-Exact tag :
-- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.6.0`
-
-Latest tag:
-- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
-
-## What's new
-- Run jellyfin-newsletter with docker-compose and keep the container running with built-in cronjobs ! Review the documentation to implement it.
-    * **Be careful if you are using the docker compose, make sure to use the new scheduler in confg.yml to define the crontab or add `restart:never` to not sent endless newsletter**
-- Fix https://github.com/SeaweedbrainCY/jellyfin-newsletter/issues/10
-    * Introduce a new scheduler option in config file, to define as a contab the schedule of each run
-    * If not defined, the script will continue to run only once, at startup
-- Fix https://github.com/SeaweedbrainCY/jellyfin-newsletter/issues/16
-    * The entrypoint is now verifying that necessary files exists and if not, create them.
-     * The entrypoint now oversee that the python script will run as non-root, instead of defining it in the dockerfile
-- Add a configuration checker to ensure config values are correct, expected and consistent
-- Improve documentation to reflect changes
-
-## What's fixed
-- A typo in default config example
-
-## About this release
-- [ ] This release introduces security patch ? **No**
-- [x] This release introduces breaking change ? **YES**
-
-## Upgrade notes:
-**This release introduces the following breaking changes :**
-
-### Config file mounting : 
-- The config file is no longer mounted as a file, you are now required to mount the entire `config` folder. The folder must contain the config.yml file and be mounted at `/app/config`. The documentation reflect this change.
-     * Example : If your config files where located to `/root/jellyfin-newsletter/config.yml`, you **NEED** to create a new folder (e.g. `config`) in  `/root/jellyfin-newsletter/`and mount `/root/jellyfin-newsletter/config`into `/app/config`
-
-# 2025.07.01 (0.6.0)
+  <Changes># 2025.07.01 (0.6.0)
 - Initial UNRAID template release</Changes>
 </Container>
