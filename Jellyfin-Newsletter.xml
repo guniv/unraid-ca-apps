@@ -16,6 +16,29 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Configuration" Target="/app/config" Default="/mnt/user/appdata/jellyfin-newsletter/" Mode="rw" Description="This is where the config file for Jellyfin Newsletter is stored. Edit the config.yml in this folder." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/jellyfin-newsletter/</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.07.01 (0.6.0)
+  <Changes># 2025.07.03 (v0.6.1 - Bugfix )
+&gt; [!Important]
+&gt;  v0.6.0 introduced breaking change when upgrading from v0.5.
+&gt;  Carefully read the upgrade notes of previous release. 
+
+## 🐳 New docker images 
+This release is available in the following tags : `v0.6`, `v0.6.1` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.6`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.6.1`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+
+## What's fixed
+- #22 : To avoid being rate limited by SMTP, a 2s delay has been introduced between each sending.
+- Documentation has been improved to cover watched tv/movies folder when not at system root
+- Logging has been improved to help adding the correct tv/movies folder in the configuration
+- Configuration parsing has been improved to accept empty scheduler
+
+# 2025.07.01 (0.6.0)
 - Initial UNRAID template release</Changes>
 </Container>
