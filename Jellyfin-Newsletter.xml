@@ -14,6 +14,7 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Category>MediaServer:Other</Category>
   <Icon>https://raw.githubusercontent.com/SeaweedbrainCY/jellyfin-newsletter/refs/heads/main/assets/jellyfin_newsletter.png</Icon>
   <Config Name="Configuration" Target="/app/config" Default="/mnt/user/appdata/jellyfin-newsletter/" Mode="rw" Description="This is where the config file for Jellyfin Newsletter is stored. Edit the config.yml in this folder." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/jellyfin-newsletter/</Config>
+  <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Changes># 2025.07.03 (v0.6.1 - Bugfix )
