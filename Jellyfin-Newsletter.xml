@@ -17,7 +17,29 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.07.03 (v0.6.1 - Bugfix )
+  <Changes># 2025.07.05 (v0.6.2)
+&gt; [!Important]
+&gt;  v0.6.0 introduced breaking change when upgrading from v0.5.
+&gt;  Carefully read the upgrade notes of previous release. 
+
+## 🐳 New docker images 
+This release is available in the following tags : `v0.6`, `v0.6.2` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.6`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.6.2`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+
+## What's fixed
+- Fix #26 &amp; Fix #27 
+   -  Due to a difference of definition of 1st day of week between usual/standard crontab and APScheduler, the use day_of_the_week in cron expression was buggy with an offset of 1 day (crontab starts week on sun, while APScheduler, used by the project starts day on mon). 
+   - Jellyfin-Newsletter cron expression is now consistent with usual/standard crontab expression, i.e. with a week starting on sun
+
+# 2025.07.03 (v0.6.1 - Bugfix )
 &gt; [!Important]
 &gt;  v0.6.0 introduced breaking change when upgrading from v0.5.
 &gt;  Carefully read the upgrade notes of previous release. 
