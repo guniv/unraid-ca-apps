@@ -17,7 +17,29 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.07.05 (v0.6.2)
+  <Changes># 2025.07.12 (v0.7.0 - Feature release)
+## 🐳 New docker images 
+This release is available in the following tags : `v0.7`, `v0.7.0` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.7`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.7.0`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+## 💡 What's new 
+- Add a debug mode to ease troubleshooting 
+- Series parsing has been fully rewritten to better handle all possibilities : new series added, new seasons added or new episodes added #8 
+   - The newsletter now adapts it self, to display the series addition in the most convenient way possible. 
+- If more than 10 media are added, media overview (description) is skipped to avoid having a too long newsletter. #24
+- If no new items were added in the observed period, newsletter is skipped. #32 
+- 
+## 🧰 What's fixed
+- Fix #28. Depending on Jellyfin installation and/or pluggin, it is possible that some items are *virtually* added. The newsletter were considering those item as new, since they officially exist in jellyfin catalog. To avoid this odd behavior, virtual episodes or movies are now ignored.
+
+# 2025.07.05 (v0.6.2)
 &gt; [!Important]
 &gt;  v0.6.0 introduced breaking change when upgrading from v0.5.
 &gt;  Carefully read the upgrade notes of previous release. 
