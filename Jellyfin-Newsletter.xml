@@ -17,7 +17,22 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.07.24 (v0.7.1)
+  <Changes># 2025.07.26 (v0.7.2)
+## 🐳 New docker images 
+This release is available in the following tags : `v0.7`, `v0.7.2` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.7`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.7.2`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+## 🧰 What's fixed
+- Some virtual items lack some crucial metatdata such a name, which was crashing the whole script. The newsletter now ignores item without any name. Fix #43.
+
+# 2025.07.24 (v0.7.1)
 ## 🐳 New docker images 
 This release is available in the following tags : `v0.7`, `v0.7.2` and `latest`
 **Recommended tag :**
