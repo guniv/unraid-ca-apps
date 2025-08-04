@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>CoolerControl</Name>
-  <Repository>gunivx/coolercontrol-docker</Repository>
-  <Registry>https://hub.docker.com/r/gunivx/coolercontrol-docker</Registry>
+  <Repository>coolercontrol/coolercontrold</Repository>
+  <Registry>https://hub.docker.com/r/coolercontrol/coolercontrold</Registry>
   <Network>bridge</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://forums.unraid.net/topic/188566-support-coolercontrol-in-docker/</Support>
   <Project>https://gitlab.com/coolercontrol/coolercontrol</Project>
-  <ReadMe>https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md</ReadMe>
-  <Overview>CoolerControl is a feature-rich fan and RGB control and monitoring application for Linux. This container is an unofficial version that runs it in Docker.&#xD;
+  <ReadMe>https://docs.coolercontrol.org/installation/unraid.html</ReadMe>
+  <Overview>CoolerControl is a feature-rich fan and RGB control and monitoring application for Linux.&#xD;
 &#xD;
-Visit https://github.com/guniv/CoolerControl-Docker/blob/main/setup.md for information on setting this container up properly.
+Visit https://docs.coolercontrol.org/installation/unraid.html for information on setting this container up properly.
 &#xD;
 You may encounter issues setting up this container on Unraid versions below 7.0.1.</Overview>
   <Screenshot>https://gitlab.com/coolercontrol/coolercontrol/-/raw/main/screenshots/coolercontrol-overview.png</Screenshot>
@@ -23,6 +23,10 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl configuration" Target="/etc/coolercontrol" Default="/mnt/user/appdata/coolercontrol" Mode="rw" Description="This is where configuration files are stored for CoolerControl. This allows settings to persist." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/coolercontrol</Config>
   <Config Name="WebUI port" Target="11987" Default="11987" Mode="tcp" Description="This port is where the CoolerControl WebUI can be accessed." Type="Port" Display="always" Required="true" Mask="false">11987</Config>
   <Config Name="HWMon" Target="/sys/class/hwmon" Default="/sys/class/hwmon" Mode="ro" Description="This exposes your hardware sensors to CoolerControl with read-only access." Type="Path" Display="advanced" Required="true" Mask="false">/sys/class/hwmon</Config>
+  <Config Name="CoolerControl Port" Target="CC_PORT" Default="11987" Description="The port that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">11987</Config>
+  <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
+  <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
+  <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
   <Changes># 2025.07.20 (2.2.2)
 ## CoolerControl Changes
 ### Added

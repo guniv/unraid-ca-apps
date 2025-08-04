@@ -26,13 +26,13 @@ jobs:
 
     - name: Run update script for CoolerControl
       run: |
-        python3 .github/scripts/update_from_releases.py --repo guniv/CoolerControl-Docker --xml CoolerControl.xml --last .last_release_coolercontrol
+        python3 .github/scripts/update_from_releases.py --source-type gitlab --source-id 30707566 --xml CoolerControl.xml --last .last_release_coolercontrol
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
 
     - name: Run update script for Jellyfin-Newsletter
       run: |
-        python3 .github/scripts/update_from_releases.py --repo SeaweedbrainCY/jellyfin-newsletter --xml Jellyfin-Newsletter.xml --last .last_release_jellyfin_newsletter
+        python3 .github/scripts/update_from_releases.py --source-type github --source-id SeaweedbrainCY/jellyfin-newsletter --xml Jellyfin-Newsletter.xml --last .last_release_jellyfin_newsletter
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
