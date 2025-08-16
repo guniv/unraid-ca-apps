@@ -17,7 +17,29 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.07.26 (v0.7.2)
+  <Changes># 2025.08.16 (v0.8.0)
+## 🐳 New docker images 
+This release is available in the following tags : `v0.8`, `v0.8.0` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.8`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.8.0`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+## ✨ What's new
+- You can now choose to ignore items that were aleady sent in previous newsletter. Add the parameter `jellyfin.ignore_item_added_before_last_newsletter: true` in your config file to enable this feature. *(See the [config-example.yml](https://github.com/SeaweedbrainCY/jellyfin-newsletter/blob/v0.8.0/config/config-example.yml) file for more information)*. Issue #38. PR #50 by @SeaweedbrainCY.
+- You can now configure yourself the treshold used by the script to auto-hide summaries when too many items are in the newsletter (to gain place). You can also always disable/enable this feature. See the [config-example.yml](https://github.com/SeaweedbrainCY/jellyfin-newsletter/blob/v0.8.0/config/config-example.yml) file for more information. Issue #45. PR #51 by @SeaweedbrainCY.
+- Current script version is now displayed in the debug logs.
+
+## 🧰 What's fixed
+- Some items metadata could collide due to a too light way to identify them. Items are now uniquely identified by their jellyfin id to avoid any collision. Issue #49. PR #52 by @SeaweedbrainCY.
+- Metadata required by this script are more strongly enforce to avoid any error at runtime. Items that don't meet metadata requirements are ignored. Issue #47. Discussion #46. PR #52 by @SeaweedbrainCY.
+- API calls to jellyfin have been optimized to not retrieve too much unused information.
+
+# 2025.07.26 (v0.7.2)
 ## 🐳 New docker images 
 This release is available in the following tags : `v0.7`, `v0.7.2` and `latest`
 **Recommended tag :**
