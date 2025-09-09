@@ -17,7 +17,31 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.08.16 (v0.8.0)
+  <Changes># 2025.09.09 (v0.8.2)
+## 🐳 New docker images 
+This release is available in the following tags : `v0.8`, `v0.8.2` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.8`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:v0.8.2`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+## ✨ What's new
+- Docker deployment pipeline improved to ease the use on fork repositories. PR #53 by @a-mnich.  
+- Optimize the docker building process and add hardening steps. PR #57 by @Utesgui 
+- Add a complete dry-run feature to ease the setup and debugging while contributing. This include HTML preview, metadata saving and SMTP testing. [More info](https://github.com/SeaweedbrainCY/jellyfin-newsletter/wiki/Troubleshoot-the-setup-and-newsletter-generation). PR #60 by @idomp 
+
+## 🧰 What's fixed
+- Fix an issue causing the whole newsletter application to crash when a requested media item is not available in TMDB anymore. PR #54 by @a-mnich 
+- Fix an issue causing the `display_overview_max_items` item to be treated as `False` when equaled to 0. PR #58 by @Utesgui 
+- Suppress a warning due to an invalid escape sequence when saving the last newsletter date in a text file. PR #56 by @Utesgui 
+- Only save last newsletter date if dry-run mode is disabled. PR #62 by @a-mnich 
+- Fix an issue causing the script to crash if no production date are provided by Jellyfin. Issue #61. By @SeaweedbrainCY 
+
+# 2025.08.16 (v0.8.0)
 ## 🐳 New docker images 
 This release is available in the following tags : `v0.8`, `v0.8.0` and `latest`
 **Recommended tag :**
