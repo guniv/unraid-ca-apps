@@ -27,7 +27,41 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2025.07.20 (2.2.2)
+  <Changes># 2025.10.04 (CoolerControl v3.0.0)
+### Removed
+- The `coolercontrol-liqctld` package and service has been removed. The service has now been
+  embedded in the `coolercontrold` daemon as a child process (!340)
+### Added
+- Overlay Profiles: Advanced offset controls on top of base Profiles (!347)
+- Custom Sensor Offset and parent-child chaining (!346)
+- Custom Profile temperature ranges (!344)
+- Ability to import and export color schemes
+- API changes to help 3rd party integrations
+- Keyboard shortcuts for common navigation (!349)
+- New device/main menu: drag and drop device and sensor sorting, pinned sensors, host name,
+  additional submenu options, color control for device and entity titles, and improved usability and
+  performance (!339)
+- Firmware-controlled profile support for some AMDGPUs and liquidctl devices. (hwmon device support
+  coming soon) (!354)
+- Foundation for more advanced device and channel specific controls
+- Min and Max CPU core frequency metrics
+- Mix Profile difference mix function (!348)
+- Ability to change liquidctl log level with environment variable
+### Changed
+- New Color Picker UI component
+- Various logging improvements
+- the `liqctld` service logs are now unified with the daemon's normal log output
+- Nearly all dependencies upgraded, including several major version changes
+- Website and documentation improvements
+- Improved metric standards in the UI (!345)
+- UI Performance and reloading improvements
+### Fixed
+- Issue with 24h time format
+- Issue with minimum fan duty threshold (!338)
+- Various minor bugs and UI issues
+
+
+# 2025.07.20 (2.2.2)
 ## CoolerControl Changes
 ### Added
 - Support for devices that only have non-controllable fans (#465)
