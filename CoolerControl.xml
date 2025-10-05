@@ -27,7 +27,15 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2025.10.04 (CoolerControl v3.0.0)
+  <Changes># 2025.10.05 (CoolerControl v3.0.1)
+### Changed
+- improved multiple-UI reconnection handling
+### Fixed
+- liqctld service failure affecting some liquidctl devices
+- RPM warning about unversioned obsoletes
+
+
+# 2025.10.04 (CoolerControl v3.0.0)
 ### Removed
 - The `coolercontrol-liqctld` package and service has been removed. The service has now been
   embedded in the `coolercontrold` daemon as a child process (!340)
