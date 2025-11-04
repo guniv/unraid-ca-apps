@@ -27,7 +27,20 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2025.10.05 (CoolerControl v3.0.1)
+  <Changes># 2025.11.04 (CoolerControl v3.0.2)
+### Added
+- firmware profile support for various HWMon drivers (!366)
+- simulated zero-rpm mode for Nvidia GPUs that don't support 0% manual fan speed (#523)
+### Changed
+- minor liqctld improvements (!363)
+- improved downstream packaging support (!364, !365, !369)
+- improved UI reconnection logic (!368, #520)
+### Fixed
+- legacy Asetec/Kraken device support (#515)
+- liqctld shutdown issue (!367)
+
+
+# 2025.10.05 (CoolerControl v3.0.1)
 ### Changed
 - improved multiple-UI reconnection handling
 ### Fixed
