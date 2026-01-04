@@ -27,7 +27,44 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2025.11.04 (CoolerControl v3.0.2)
+  <Changes># 2026.01.04 (CoolerControl v3.1.0)
+### Added
+- support for applesmc and macsmc-hwmon drivers
+- Advanced Device Settings per device
+- direct-access device setting for all liquidctl devices that also have a hwmon driver
+- convience device setting for swapping driver types
+- support for dynamic CPU Cores (#529)
+- plugin system (beta) for device and integration services
+- ability to connect multiple daemons together (read-only)
+- groundwork layed for plugins to extended functionality and integration with other services
+- additional Alert options: notifications, audio, shutdown
+- system tray icon displays badge when alert or error is present
+- information tooltip when using a Default Profile to explain it's effects on various device drivers
+- new Function settings: asymmetric and fixed step sizes, plus threshold hopping toggle
+- channel and entity names can now be directly edited directly on their respective pages by clicking
+  on them
+- device and entity menu drop-down border colors
+- mobil menu and drawer for smaller screens
+### Changed
+- improved support for liquidctl Corsair PSU drivers (#530)
+- improved resilience, logging, and retry behavior for liquidctl devices at boot. (#531)
+- improved handling of Kraken bucket errors (#532)
+- alert states are always reevaluated on startup (#489)
+- improved UI asset caching
+- UI asset compression by default
+- improved handling of slow connections to the UI
+- app info page and log view improvements, including auto-scroll to bottom and an expand view
+  button.
+- improved various description and tooltips text throughout the app
+### Fixed
+- Aura LED device issues at startup (#531)
+- move-to-top issue with pinned menu items
+- issue where using the move-top-top buttons didn't save the menu state
+- various Gnome related issues around notifications and the system tray
+- default device colors not changing with theme change
+
+
+# 2025.11.04 (CoolerControl v3.0.2)
 ### Added
 - firmware profile support for various HWMon drivers (!366)
 - simulated zero-rpm mode for Nvidia GPUs that don't support 0% manual fan speed (#523)
