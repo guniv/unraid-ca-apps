@@ -17,7 +17,22 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2025.12.15 (v0.10.1)
+  <Changes># 2026.02.24 (v0.10.2)
+## 🐳 New docker images 
+This release is available in the following tags : `0.10`, `0.10.2` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:0.10`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:0.10.2`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+## 🧰 What's fixed
+- New series were no longer displaying the detail of new added items (e.g. new season number or new episode number). Fix #107 in #108 by @SeaweedbrainCY. 
+
+# 2025.12.15 (v0.10.1)
 ## 🐳 New docker images 
 This release is available in the following tags : `0.10`, `0.10.1` and `latest`
 **Recommended tag :**
