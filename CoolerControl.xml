@@ -27,7 +27,12 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2026.01.10 (CoolerControl v3.1.1)
+  <Changes># 2026.03.09 (CoolerControl v4.0.1)
+### Fixed
+- Issue with bundled UI assets put in wrong directory
+
+
+# 2026.01.10 (CoolerControl v3.1.1)
 ### Changed
 - excluded it87 driver when detecting firmware profile support (not working)
 - expose gRPC port by default in docker images
