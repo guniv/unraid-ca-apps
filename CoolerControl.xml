@@ -27,7 +27,53 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2026.03.22 (CoolerControl v4.1.0)
+  <Changes># 2026.04.21 (CoolerControl v4.2.0)
+### Added
+- Automatic detection of added or removed devices at runtime, with desktop notifications via SSE and
+  browser push support (!455)
+- Built-in CPU, GPU, RAM, and drive stress tests for easy profile and fan curve validation, using
+  stress-ng when available (!453)
+- Full-page views for plugins, a dedicated Plugins overview page, plugin enable/disable, and
+  alphabetical ordering (!458)
+- Sensors Detect and device change detection toggles in settings (!457)
+- Plugin data proxy for safely retrieving custom data from plugin services (!473)
+- Allow Fixed profiles as members of Mix profiles (!471)
+- Advanced Device Setting for per-device Command Delay to handle device timing issues (!465)
+- Control Flow interactivity improvements: clamp to content, panning limits, separate columns for
+  parents and children, more space for large charts, and switching profile sources directly from
+  profile and fan nodes (!463)
+- Support for the liquidctl ga2lcd device driver (#571, !464)
+- NVIDIA GPU hotspot temperature reporting (!456)
+- Advanced Device Setting to enable AMD GPU Overdrive at the kernel level with improved amdgpu
+  logging (!474)
+- Thinkpad auto-mode switch on system suspend as a workaround for hardware issues (#550, !459)
+- Improved Alert Logs: better handling of hard shutdowns and restarts, larger retention, search
+  input, and paginator at the top (!452)
+- Log filter query parameter on the standard LCD settings API (!466)
+- Detected channels and temperatures now included in device info log output (!468)
+- "What's New" link in the UI pointing to the changelog (!461)
+- Animated logo driven by the UI eye candy setting
+- Versioned cargo vendor release asset (!448)
+- Guidance for viewing plugin service logs across supported init systems (!472)
+### Changed
+- Plugin data and session data moved to a dedicated data directory, separate from config (!451)
+- Alert log directory moved to the data directory (!452)
+- OpenRC systems now use service-daemon for plugin service management (!472)
+- Hwmon and liquidctl devices now use shared failsafe metric values (!455)
+- Thinkpad device settings moved into the Advanced Device Settings popover
+- Switched the daemon's TLS backend to ring for broader platform compatibility
+- Reduced some liquidctl startup warnings to info level for CoolerControl logging
+- liqctld processes now runs unbuffered for improved log output
+### Fixed
+- Issue when a service plugin device channel failed at startup left data missing (!467)
+- Skip device port scanning when Secure Boot is enabled, logging info instead of a warning (!454)
+- Failsafes are now also applied to hwmon fan-only devices (!465)
+- NixOS hwdata pkg-config path resolved at build time (!449)
+### Security
+- Updated various dependencies with security advisories
+
+
+# 2026.03.22 (CoolerControl v4.1.0)
 ### Added
 - Tags for fans, displayed in the main menu and used for applying profiles/filters (#295, !436)
 - Prometheus metrics endpoint (#366, !431)
