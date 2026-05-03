@@ -17,7 +17,91 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2026.02.24 (v0.10.2)
+  <Changes># 2026.05.03 (v1.0.0)
+Very happy to release Jellyfin-Newsletter v1.0.0 ❤️
+This version brings massive improvements, but has several breaking changes. Upgrade with care
+
+&gt; [!Caution]
+&gt; **This version includes breaking changes**. Make sure to review it and adapt your configuration file before running it.
+
+## 🐳 New docker images 
+This release is available in the following tags : `latest`, `1.0` and `1.0.0`
+**Major release tag (recommended) :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:1.0`
+
+Latest tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:1.0.0`
+
+## 💎 Major changes
+### Go engine
+This version brings a full rewrite of the jellyfin-newsletter engine from python to Go. The full explanation is listed [here](https://github.com/SeaweedbrainCY/jellyfin-newsletter/discussions/103). 
+
+The main impact for the user is about the performance that are **tremendously improved.**
+
+Comparison of the 2 engines
+| |Python Engine (version &lt;1.0.0) | Go engine (version &gt;= 1.0.0)| Improvement |
+|---|---|---|---|
+| Docker image size| 810 Mo | 29 Mo| **✨ 27x lighter ✨**|
+| Memory usage | 35 Mo | 3.5 Mo | **✨ Consume 10x less ✨**|
+
+Overall, the Go engine brings a much cleaner architecture, more efficient and ready to have more features or plugin easily plugged.
+
+### Weblate localization
+It is now easier than ever to contribute to Jellyfin-Newsletter localization ! Everyone can help translating the newsletter directly on [weblate](https://weblate.seaweedbrain.xyz). Currently the supported languages are : 
+
+&lt;p align="center"&gt;
+&lt;a href="https://weblate.seaweedbrain.xyz/engage/jellyfin-newsletter/"&gt;
+&lt;img src="https://weblate.seaweedbrain.xyz/widget/jellyfin-newsletter/multi-auto.svg" alt="State of localization" /&gt;
+&lt;/a&gt;
+&lt;/p&gt;
+
+## ⛓️‍💥  Breaking changes
+### Placeholders
+#### Placeholders in config file
+Placeholders are now parsed using Go built-in template package ([pkg.go.dev/text/template](https://pkg.go.dev/text/template)). Therefore the old placeholders `{variable_name}` will not be recognized anymore and need to be replaced with the new syntax: `{{.VariableName}}`. **Variables names also changed**. 
+Here is a complete list of the old and new available placeholders : 
+|Description|  Old placeholder (version &lt;1.0.0) |  New placeholder (version &gt;=1.0.0)|
+|---|---|---|
+|Date of the day. Format `Y-m-d`.  |`{date}` | `{{.Date}}` | 
+| Today's day name, localized.|`{day_name}` | `{{.DayName}}`|
+| Today's day number of the month.|`{day_number}` | `{{DayNumber}}` |
+|Current month name, localized.|`{month_name}` | `{{.MonthName}}` |
+| Current month number.  |`{month_number}` | `{{MonthNumber}}` |
+|Current year.|`{year}` | `{{.Year}}` |
+| First date new addition are taken into account. Depends on `observed_period_days` config parameter.  Format `Y-m-d`. | `{start_date}` | `{{.StartDate}}`|
+| Day name of the first observed date. | `{start_day_name}` | `{{.StartDayName}}` |
+| Day number of the first observed date. |`{start_day_number}` | `{{.StartDayNumber}}`|
+| Month name of the first observed date. |`{start_month_name}` | `{{.StartMonthName}}` |
+| Month number of the first observed date. |`{start_month_number}` |`{{.StartMonthNumber}}`  |
+|Year the first observed date. |`{start_year}` |  `{{.StartYear}}` |
+
+#### Placeholders in template 
+Template have been entirely re-built to use the go template syntax. Please refer to [themes](https://github.com/SeaweedbrainCY/jellyfin-newsletter/tree/v1.0.0-dev.10/engine-go/internal/template/themes) for more informations
+
+### Dry run
+When dry run is enabled, the key `dry-run.output_directory` is now mandatory.
+
+
+
+## ✨ What's new
+- The entire codebase has been rewritten in Go. PR #117, #116, #115, #114, #113, #112, #111, #110, #109, #101, #99 by @SeaweedbrainCY. Especially; 
+   - Add the support of non-authenticated SMTP connections, using `email.smtp_tls_type: "NONE"`. PR #113 by @SeaweedbrainCY.
+   - Add support of 2 logging format `console` and `json`. Can be configured under `log.format`. PR #99 by @SeaweedbrainCY.
+   - Add unit test with 70% coverage. PR #116 by @SeaweedbrainCY. 
+   - Add integration test with end to end workflow. PR #116 by @SeaweedbrainCY. 
+   - Improve jellyfin connection test to help troubleshoot connectivity issues. PR #101 by @SeaweedbrainCY 
+- Create [weblate.seaweedbrain.xyz](https://weblate.seaweedbrain.xyz) to support easily new translations. PR #110 by @SeaweedbrainCY.
+- Add integration of weblate in the embedded localization. PR #110 by @SeaweedbrainCY.
+- Add support of Catalan, German, Finnish, Portuguese and improve Italian. PR #110 by @GerardUmbert. 
+
+## ❤️ Special thanks
+Special thanks to 
+- [@filou1003](https://github.com/filou1009) for the bug report and beta testing
+
+# 2026.02.24 (v0.10.2)
 ## 🐳 New docker images 
 This release is available in the following tags : `0.10`, `0.10.2` and `latest`
 **Recommended tag :**
