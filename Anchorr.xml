@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Anchorr</Name>
+  <Repository>nairdah/anchorr:latest</Repository>
+  <Registry>https://hub.docker.com/r/nairdah/anchorr</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://github.com/openVESSL/Anchorr</Project>
+  <Overview>A helpful Discord bot for requesting media via Seerr and receiving Jellyfin notifications for new content in your library. </Overview>
+  <Category>MediaServer:Other</Category>
+  <WebUI>http://[IP]:[PORT:8282]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/openVESSL/Anchorr/main/assets/logo.png</Icon>
+  <Requires>Jellyfin, Seerr</Requires>
+  <Config Name="WebUI Port" Target="8282" Default="" Mode="tcp" Description="The port that the WebUI will be on." Type="Port" Display="always" Required="false" Mask="false">8282</Config>
+  <Config Name="Persistent configuration storage" Target="/usr/src/app/config" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/anchorr</Config>
+  <Config Name="Webhook port" Target="WEBHOOK_PORT" Default="" Mode="" Description="Web dashboard port internally. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">8282</Config>
+  <Config Name="Production mode" Target="NODE_ENV" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">production</Config>
+  <Config Name="Bind Host" Target="BIND_HOST" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
+  <Changes># 2026.05.04 (v1.5.4)
+Initial UNRAID template release</Changes>
+</Container>
