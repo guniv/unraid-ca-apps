@@ -17,7 +17,28 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2026.05.03 (v1.0.0)
+  <Changes># 2026.06.20 (v1.1.0)
+## 🐳 New docker images 
+This release is available in the following tags : `1.1`, `1.1.0` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:1.1`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:1.1.0`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+## ✨ What's new
+- You can now bring your own theme are directly make Jellyfin-Newsletter use it from your disk. This ease development and local theme customization. Fix #137. PR #141 by @SeaweedbrainCY. Ref. #136. See the [Bring your own theme wiki page](https://github.com/SeaweedbrainCY/jellyfin-newsletter/wiki/Bring-your-own-themes) for more info
+-  The newsletter subtitle is now optional. Fix #140. PR #142 by @SeaweedbrainCY. Ref #139.
+-  Items in the newsletter are now clickable and redirects directly to the item's page in Jellyfin. Fix #131. PR #138 by @SeaweedbrainCY.
+- Add support of [Poutine](https://github.com/boostsecurityio/poutine) for cicd security scanning. PR #133 by @SeaweedbrainCY.
+
+## 🧰 What's fixed
+- Various CICD security improvement with pinned version and dedicated steps permissions.
+
+# 2026.05.03 (v1.0.0)
 Very happy to release Jellyfin-Newsletter v1.0.0 ❤️
 This version brings massive improvements, but has several breaking changes. Upgrade with care
 
