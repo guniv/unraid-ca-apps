@@ -27,7 +27,248 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2026.05.23 (CoolerControl v4.3.1)
+  <Changes># 2026.09.06 (CoolerControl v5.0.0)
+[Feature Presentation](https://gitlab.com/coolercontrol/coolercontrol/-/blob/5.0.0/.gitlab/release-notes/5.0.0.md)
+
+## Full Changelog
+
+### Added
+- Rebuilt application UI shell: Home, Cooling, Monitoring, Devices, Plugins and Settings sections,
+  with a persistent icon rail, per-section side panels, and landing pages for each area
+- Mobile layout with bottom navigation, a header overflow menu for the Access, Power and Plugins
+  menus, a dashboard switcher, and responsive editors throughout
+- Consolidated channel page in the Cooling section: embedded profile editor, mini curve previews,
+  grouped manual duty control with a sized gauge, and per-channel setup menus
+- Expandable control-flow tree on channel pages, drawn with CSS instead of a chart library, with
+  links from each chain pill to its editor and persisted open state
+- Auto-Create Profiles wizard that generates cooling entities for CPU coolers, GPU fans, AIO pumps
+  and radiators, case fans and laptops, driven by editable tuning data compiled into the daemon
+- Calibration wizard with a batch API, per-fan warnings surfaced in the picker and completion log,
+  resume support, and abort on an active alert
+- Calibration understands firmware fan curves: firmware-controlled fans are flagged in the picker,
+  their curves are mapped through calibration, and sweeps skip the clamped duty band
+- Calibration state and firmware-curve status are shown on cooling channel cards, with the curve
+  dialog acting as the calibration hub
+- A calibrated fan's settings can be converted to true duty from its channel page, backed by a new
+  daemon duty-map endpoint, asking for confirmation before forking a shared profile and showing fork
+  and sharing state on every channel
+- Progress bars in the calibration wizard
+- Device health tracking: a daemon-side registry of failsafed channels and missing or stale temp
+  sources, surfaced as menu badges, a health panel, entity-page warnings, and a Home status dot,
+  split into permanently unsupported and currently degraded sections
+- Hardware Support card on Home, separate from device health: what the startup detection found, why
+  a given fan channel cannot be controlled, and a paste-ready hardware report that can be previewed
+  in-app and copied as a code block for bug reports
+- Saved daemon connections in the desktop app: a managed list in the connection wizard, a tray
+  submenu to switch daemons, and per-connection access tokens and pinned sensors
+- TLS certificate pinning and validation in the desktop app, with a prompt to trust an unknown
+  daemon certificate and a manager for the ones already trusted
+- Pinned sensor readings in the tray menu, colored to match the UI and clickable to open their page,
+  grouped into a submenu when many are pinned
+- The desktop app asks once, the first time closing its window would send it to the tray instead of
+  quitting
+- The desktop app's connection wizard shows the last connection error, so a stopped service, a wrong
+  port and a refused certificate are told apart
+- The desktop app's tray, connection wizard and dialogs are now translated, using strings pushed
+  from the UI
+- A single multiplexed `GET /sse` endpoint carrying every event kind on one connection, with an
+  `events` filter to narrow the subscription; the UI and the desktop app each use one stream now
+- User-defined device and channel names are now daemon-owned in a hand-editable `overrides.toml`,
+  editable from any entity page, with detected-name hints and a one-time migration from
+  `config-ui.json`
+- lm-sensors `sensors.conf` support: applies its labels and honors `ignore` for hwmon channels
+  (#334)
+- Installed color themes: True Black, Dracula, Gruvbox, One, Catppuccin, Tokyo Night, Monokai, Nord,
+  Solarized, Hackerman and Solitude, in light and dark variants where the palette has both, chosen
+  from a preview dropdown with color swatches
+- The System theme follows the desktop's own colors in the desktop app, as far as the desktop
+  exposes them: the full palette on KDE, otherwise the accent color and light or dark preference
+  from the XDG desktop portal, and the built-in light and dark themes when neither is available. The
+  settings preview shows whichever of those will land
+- Custom themes gained success, warning, error and info colors, carried by a new `cct2:` theme code
+- Multi-source alerts with per-source state, timed silencing with notify-on-expiry, and a per-alert
+  log table on each alert page
+- Alert indicator in the top bar, silenced and disabled glyphs in the menus, and tray badge state
+  pushed to the Qt app over IPC
+- Tags on channel rows as interactive chips, with a tag filter bar and a tag manager
+- Modes management with apply wizards, where-used listings, and a previous-mode indicator
+- "Used by" links and type icons across profiles, functions, channels and sensors
+- Folders in the Cooling panel's Profiles &amp; Functions library: add, rename and delete folders, and
+  drag profiles and functions in and out of them. The same grouping is carried into every profile
+  and function picker, so a picker reads like the panel
+- Rows in the Modes table link to the page of the channel they set, picking the cooling, lighting or
+  LCD editor by what the channel controls
+- Backup CLI: archive, restore, list, rotated backup and config-check subcommands
+- Bulk device and sensor enable/disable editor
+- Target versus actual duty in the Mix profile editor
+- Actual fan duty drawn alongside the curve on Graph profile charts, live duty lines on the profile
+  overlay chart, and a points-table corner remembered per profile
+- A reconnecting screen when the daemon connection drops, with the wait scaled to the poll rate and
+  a desktop-app notification once the daemon has been unreachable for ten seconds
+- Channels remember the profile they last ran, and offer it back after a spell at a fixed speed
+- Temperature and power readings shown during stress tests
+- Per-channel failsafes for service plugin devices
+- Section hotkeys, a configurable startup page, and a menu collapse button in the header
+- Interface font setting, with IBM Plex bundled and a numeric face used for live values
+- Live chart on the custom sensor page
+- Reworked product tour, replayed once for everyone
+- Daemon settings grouped into subsections, with a range unlock for guarded values and a startup
+  delay that now reaches 120 seconds
+- Hotspot temperature for NVIDIA Blackwell (RTX 50xx) cards, read from an NVAPI register
+- Firmware-reclaimed fan control is detected and re-asserted, so a fan taken back by the board
+  firmware returns to CoolerControl
+- The web UI can be installed as an app from the browser, carrying a web app manifest and icons; an
+  installed window gets the in-app back button that the desktop app already has
+- Debian and Ubuntu packages are published to `apt.coolercontrol.org`, including Ubuntu arm64 builds
+- The daemon reports readiness and liveness to systemd, so a wedged main loop is restarted by the
+  systemd watchdog
+- Global search over pages, entities, settings and actions, with recent results
+- System power profiles can be mapped to Modes, so switching the desktop's power profile switches
+  the cooling Mode
+- Cooling and Devices pages help explain missing and uncontrollable fans, with help lines that link
+  to the hardware report
+- Help icons across the UI now come from one shared component, and renameable titles are marked with
+  an edit icon
+- A failed fan write on a ThinkPad hints at enabling ThinkPad fan control, and the enabled state is
+  reflected without a daemon restart
+- Plugin UIs receive the whole theme palette, so plugin pages match the active theme
+- liqctld reports LCD frames that outgrow their bucket, and gif upload is hidden on firmware that
+  refuses it
+### Changed
+- The daemon now runs on the compio runtime with io_uring by default, with a small tokio sidecar for
+  dependencies that require it; `--no-default-features` still builds the tokio-only path
+- PrimeVue was replaced by an in-house component kit built on reka-ui, covering dialogs, toasts,
+  tooltips, dropdowns, selects, tables, inputs and confirms
+- Toasts are capped, hover-pausable and copyable; dialogs, dropdowns and popovers share consistent
+  offsets, shadows and stacking
+- Fan channels now resolve to one canonical page regardless of where they are opened from
+- Log output is bounded and de-duplicated: capped log buffers, an episode gate for repeated device
+  errors, and coalesced SSE bursts
+- Device UIDs are guarded against duplicates, so two identical devices no longer collapse into one
+- Names are resolved once in the daemon and used consistently in logs, alerts and failsafe messages
+- Settings moved from tabs to an anchored card grid
+- Info and Tools was dissolved into the Home section
+- Alert thresholds accept fan speeds up to 30000 RPM
+- Warning and success colors darken on light themes to stay legible, and status colors are now
+  checked for contrast in the test suite
+- The desktop app authenticates with its own bearer token per connection instead of a shared
+  session, and discards the web renderer while it sits in the tray
+- The per-stream `/sse/{logs,status,modes,alerts,notifications}` routes are deprecated in favour of
+  `GET /sse`, and are scheduled for removal in 5.2.0
+- AMD GPU fan curves are no longer reset before every apply, and unusable curves are rejected rather
+  than written
+- Idle liqctld connections are reaped, and NVML is released when all GPUs are disabled or none are
+  detected
+- NVAPI thermal lookups and PCI bus lookups are cached
+- LCD frames are packed in C and sent in a single transfer, the per-apply re-initialize was dropped,
+  and single-temp images are rendered off the async runtime, so an LCD update costs far less
+- Sysfs descriptors are held across ticks, sysfs values are read without heap allocation, and Time
+  Average and EMA custom sensors keep a cached sample window, lowering per-tick overhead
+- liqctld reports each LCD's model, device path and framebuffer packing, and logs why a frame skips
+  the rotation
+- Live chart animation is throttled and paused off-screen
+- The Makefiles were split and documented behind `make help`
+- protoc is no longer a build dependency; protox generates the gRPC code
+- The minimum supported Rust version is 1.88
+- License headers were converted to SPDX short-form, an AUTHORS file was added, and REUSE compliance
+  is checked in CI
+- The OpenAPI specification is generated offline, pretty-printed, and refreshed on every version
+  bump
+- Many upstream dependencies updated across Cargo and npm, and derive_more, axum-typed-multipart and
+  zstd compression were dropped
+- Application icons were redrawn from generated sources: a symbolic tray icon sized to sit with its
+  peers, notification icons matching the app stroke, and an alert badge that stays error-red on
+  symbolic hosts
+- The logo and fonts are bundled so they are content-hashed, and unhashed assets are revalidated
+  rather than pinned, so a browser picks up a new UI build
+- The Kraken 2023 firmware 2 LCD frame is sent once per update instead of twice, and LCD images are
+  capped at liquidctl's gif size limit
+- Modals dim with opacity instead of a backdrop blur, which flickered on some GPU and QtWebEngine
+  combinations
+- Plugin services are restarted rather than replaced on a configuration change, and a service is
+  installed when its plugin is enabled
+- Plugins running under OpenRC require OpenRC 0.45 or newer
+- Access tokens are validated against a SHA-256 digest instead of argon2, so an authenticated
+  request no longer pays a password hash on every call; the argon2 hash is still written for
+  backward compatibility.
+### Fixed
+- liqctld could be orphaned during a liquidctl error storm, and now exits promptly on shutdown
+- Blank device UIDs on some systems (#594)
+- RDNA3/4 AMD GPUs went undetected when the kernel overdrive mask was off (#589)
+- Calibration now enters manual control mode before measuring (#583)
+- Older AMD GPUs without hwmon load sensors report load from DRM fdinfo (#562)
+- GPU stress tests now run off the async runtime and are judged by power draw, fixing newer cards
+- Settings are skipped for channels a device no longer offers, instead of erroring
+- Generated curve floors are clamped to the channel minimum so a low floor cannot stall a fan
+- Kraken LCD writes could take a stale HID report as their answer, which surfaced as missing
+  messages and bucket-switch errors while an image was uploading
+- Single-temp LCD images were rendered to one shared file, so two LCD channels could tear each
+  other's image or display the wrong sensor
+- Deleting a child custom sensor stripped its parent's other sources
+- Calibration trusts a fan's RPM over a sub-floor stall reading, derives the sustain floor across
+  misaligned sweeps, and corrects the inverse duty map's boundaries
+- Duplicate device UIDs no longer drop devices from AMD and liquidctl repositories
+- Name overrides survive a save error instead of losing the cascade
+- REST and gRPC server startup are decoupled, so one failing does not block the other
+- Chart axis titles no longer overlap the neighbouring axis, and the temp line is clamped to range
+- Charts and their observers are torn down when a page unmounts, which was the main source of memory
+  growth in the desktop app over long sessions
+- AMD zero-RPM support is detected by reading the firmware setting rather than guessing, a failed
+  curve apply is aborted instead of half-written, and an EIO now says what caused it
+- The desktop app no longer loops on reconnect notifications, applies certificate validation without
+  a restart, and raises its window when tray-mode authentication fails
+- The desktop app keeps only one daemon health probe in flight and restarts its connection loop when
+  the event stream answers 401, instead of sitting on a dead session
+- Korean locale detection, translations synced across all supported locales, and translations that
+  had drifted from the English source refreshed
+- Disabled IP family is logged at info instead of warning
+- FIFO pairing could wedge the test suite, and sysfs read tests handle ENODATA
+- SATA drive UIDs are derived from stable hardware identity, WWID first and then serial, with
+  existing settings copied forward, so a drive keeps its settings across reboots and reconnects
+  (#599)
+- Drive power state is also read through SAT passthrough, so a sleeping drive is not woken to be
+  measured
+- A transient read failure on a File custom sensor no longer drops the sensor
+- Each LCD channel renders to its own image file, shutdown settings whose image is gone are dropped,
+  and the stock image is used when a configured shutdown image cannot be read
+- Alerts re-evaluate when a source is removed, an edit that clears an alert notifies, an announced
+  Error survives an edit, messages name the sensor that left the watch list and use resolved channel
+  labels, the alert count follows silence expiry, and Error alerts are listed on Home
+- Off-scheme colors and tag severities are drawn from the themed tokens
+- The search field keeps a focus ring only for keyboard users and drops it after taking a result
+- The Qt tray alert icon keeps its `-symbolic` suffix and falls back to the pre-rename name
+- The application SVG opens within gdk-pixbuf's 256-byte sniff window, so more icon loaders render
+  it
+- A Standard Function with a maximum step size advanced only one step every 30 seconds once the
+  temperature went flat, because the step limiter stopped running and the safety latch was left to
+  move the fan. The limiter now carries the ramp through to its target, including the last step to
+  0% or 100% when "Always apply 0% / 100%" is enabled, and the Threshold Hopping tooltip says that
+  the maximum step size is always respected (#602)
+- Malformed HTTP Basic credentials are rejected instead of panicking the request
+- Repeated daemon warnings are reported once per outage rather than every tick.
+### Removed
+- The EMA Function type. Existing configurations are permanently converted to Identity on load; use
+  an EMA Custom Sensor for temperature smoothing
+- JSON theme file import and export. Theme codes are now the way to share a custom theme
+- The legacy shell and Control views, and the per-device Settings tab
+- PrimeVue, element-plus, vue-flow and radix-vue dependencies
+- The `notify` subcommand, and the unused `colors` field from the LCD settings enum
+- The gRPC server reflection service, and its build dependency
+### Security
+- Device and channel name overrides reject injection-capable characters
+- Sensor and channel labels are escaped in the chart tooltip, which is built as markup
+- The desktop app pins and validates the daemon's TLS certificate and confines its web engine to the
+  daemon it is connected to
+- The desktop app's settings file is owner-only, and superseded access tokens are deleted
+- npm dependency install scripts are denied during the UI build
+- Backup archives are created owner-only, bounded on extraction, and restore only files listed in
+  the manifest; restored credentials are written owner-only
+- Dependencies updated to clear audit advisories
+- Plugin services run with new privileges denied, and plugin folder ownership is hardened
+- Failed authentication attempts are throttled per client address
+
+
+# 2026.05.23 (CoolerControl v4.3.1)
 ### Added
 - True Duty Mapping calibration for RPM-reporting fans and pumps (#499, !492)
 - Automatic kick-in boost detection during calibration, with user-configurable boost duration and
