@@ -18,7 +18,27 @@
   <Config Name="Webhook port" Target="WEBHOOK_PORT" Default="" Mode="" Description="Web dashboard port internally. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">8282</Config>
   <Config Name="Production mode" Target="NODE_ENV" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">production</Config>
   <Config Name="Bind Host" Target="BIND_HOST" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
-  <Changes># 2026.09.02 (v1.6.0 — Weekly Roundup & Library Seed)
+  <Changes># 2026.09.11 (v1.6.1 — Jellyfin 12 Hotfix)
+Hotfix release. Jellyfin 12.0 broke all Jellyfin communication in 1.6.0 and earlier. If you have upgraded your server to Jellyfin 12, this update is required.
+
+### 🐛 Fixed
+
+- **Jellyfin 12 compatibility**: Jellyfin 12.0 disables legacy authorization by default, and its migration turns it off on existing installs as well. Anchorr authenticated exclusively via the now-disabled `X-MediaBrowser-Token` header and `api_key` query parameter, so every Jellyfin request failed with `401` after upgrading: no notifications, no library list in the dashboard, no WebSocket connection. All Jellyfin calls now use the standard `Authorization: MediaBrowser` header, and the WebSocket handshake uses the `ApiKey` query parameter. Both are accepted by Jellyfin 10.10.x and 12.x, so older servers keep working and no configuration change is needed.
+- **Invalid Jellyfin API key now reported directly**: A missing or malformed API key previously produced a valid-looking request that Jellyfin answered with a generic `401`, making a config mistake indistinguishable from a server problem. The key is now validated before the request and the actual reason is logged.
+- **Jellyfin WebSocket auth failures are no longer silent**: A rejected API key surfaced only as a generic transport error inside an endless reconnect loop. Authorization rejections now log the real cause.
+
+### 🔒 Security
+
+- **Jellyfin auth header no longer written to log files**: Passing a raw axios error to the logger serialized the request configuration, including the `Authorization` header, into `logs/combined-*.log` and `logs/error-*.log` in cleartext. The affected Jellyfin code paths now log only the error message. Existing log files are not rewritten. If you have been running Anchorr with debug logs retained, rotate or delete `logs/` and regenerate your Jellyfin API key.
+
+## Upgrade
+
+```bash
+docker compose pull &amp;&amp; docker compose up -d
+```
+
+
+# 2026.09.02 (v1.6.0 — Weekly Roundup & Library Seed)
 ### ✨ Added
 
 - **Weekly Roundup**: Optional scheduled Discord post that summarizes new Jellyfin content from the last 7 days. Disabled by default. Configurable via the dashboard (channel, weekday, hour, embed color). The roundup groups items by library and collapses episodes of the same series into one line (e.g. _"My Show — Seasons 1 &amp; 2 (12 episodes)"_). Item titles link directly to Jellyfin. An hourly scheduler tick plus a persisted post timestamp (`config/dedup-roundup-state.json`) makes the post idempotent across Docker restarts. Sonarr/Radarr quality upgrades are filtered out via a stable-identity first-seen map (`config/dedup-roundup-first-seen.json`) so a re-imported file does not show up as "new".
