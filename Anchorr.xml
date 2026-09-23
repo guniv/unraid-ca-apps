@@ -18,7 +18,23 @@
   <Config Name="Webhook port" Target="WEBHOOK_PORT" Default="" Mode="" Description="Web dashboard port internally. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">8282</Config>
   <Config Name="Production mode" Target="NODE_ENV" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">production</Config>
   <Config Name="Bind Host" Target="BIND_HOST" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
-  <Changes># 2026.09.11 (v1.6.1 — Jellyfin 12 Hotfix)
+  <Changes># 2026.09.23 (v1.6.2 — Discord Embed Link Fix)
+Patch release. Fixes `/search` and `/request` failing outright when Jellyseerr or Jellyfin is configured with an internal address, such as a Docker Compose service name. If your URLs are public hostnames, nothing changes for you.
+
+### 🐛 Fixed
+
+- **`/search` and `/request` failed when `SEERR_URL` was not publicly resolvable** ([#130](https://github.com/openVESSL/Anchorr/issues/130)): Discord rejects embed links whose hostname has no dot, such as a Docker Compose service name (`http://seerr:5055`) or `localhost`. The link is now omitted instead of failing the reply, and the cause is logged once.
+- **Jellyfin notifications failed with a container-internal `JELLYFIN_BASE_URL`**: The item link and the "Watch Now" button hit the same rejection, which made the whole notification fail. Those links are now dropped the same way.
+
+No configuration change is needed. Affected embeds simply have no clickable link.
+
+## Upgrade
+
+```bash
+docker compose pull &amp;&amp; docker compose up -d
+```
+
+# 2026.09.11 (v1.6.1 — Jellyfin 12 Hotfix)
 Hotfix release. Jellyfin 12.0 broke all Jellyfin communication in 1.6.0 and earlier. If you have upgraded your server to Jellyfin 12, this update is required.
 
 ### 🐛 Fixed
