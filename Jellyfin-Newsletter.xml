@@ -17,7 +17,53 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2026.08.26 (v1.3.0)
+  <Changes># 2026.09.30 (v2.0.0)
+&gt; [!important]
+&gt; **This version is the 1st officially supporting Jellyfin 12.0**
+&gt;
+&gt; Therefore, prior versions of Jellyfin are now longer officially supported by Jellyfin-Newsletter &gt;= v2.0.0
+
+
+
+## 🐳 New docker images 
+This release is available in the following tags : `2.0`, `2.0.0` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:2.0`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:2.0.0`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+## ✨ What's new
+- Add full support of Jellyfin 12.0. PR #167 by @SeaweedbrainCY.
+- A new documentation website has been launched to host the official Jellyfin-Newsletter docs : [jellyfin-newsletter.seaweedbrain.xyz](https://jellyfin-newsletter.seaweedbrain.xyz). PR #165 by @SeaweedbrainCY.
+- Ignore items feature. You can now explicitly ignore an item by its id or name using the new [email_template.ignored_items](https://jellyfin-newsletter.seaweedbrain.xyz/docs/configuration#email-template) option. This will help you to tackle down false positives. PR #164 by @SeaweedbrainCY 
+- Improve hebrew support. PR #163 by @idomp. 
+- Improve debug logs. PR #167 by @SeaweedbrainCY.
+
+
+
+## 🧰 What's fixed
+- Fix media clickable URL for series. Issue #150. By @SeaweedbrainCY.
+- Series are now considered new if all the underlying episodes are new (same logic for season). Their Jellyfin attribute "DateCreated" are not trusted anymore (because they don't correspond to the date of the added episodes but of their creation in Jellyfin's database). This should narrow the number of false positive. PR #167 by @SeaweedbrainCY.
+
+## 🧽 Chore
+- Bump github.com/moby/go-archive from 0.2.0 to 0.3.0. PR #154 by @SeaweedbrainCY.
+- Upgrade Jellyfin API integration to v12's spec. PR #167 by @SeaweedbrainCY.
+- Bump go.opentelemetry.io/otel/sdk from 1.43.0 to 1.45.0. PR #166 by @SeaweedbrainCY.
+- Bump golang from 1.26-alpine to 1.27-alpine. PR #157 by @SeaweedbrainCY 
+
+
+Current translation status (updated once a day):
+
+![Crowdin translation status](https://raw.githubusercontent.com/SeaweedbrainCY/jellyfin-newsletter/refs/heads/main/assets/crowdin-status.svg)
+
+
+**Full Changelog**: https://github.com/SeaweedbrainCY/jellyfin-newsletter/compare/v1.3.0...v2.0.0
+
+# 2026.08.26 (v1.3.0)
 ## 🐳 New docker images 
 This release is available in the following tags : `1.3`, `1.3.0` and `latest`
 **Recommended tag :**
