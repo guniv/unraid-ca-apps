@@ -27,7 +27,21 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2026.10.18 (CoolerControl v5.1.0)
+  <Changes># 2026.10.19 (CoolerControl v5.1.1)
+### Changed
+- More tests that depend on their build environment, such as the host, sandbox or toolchain, are
+  gated behind the `gated-tests` feature in every daemon crate
+- Adjusted the Fedora spec build codegen units and debuginfo, cutting its Copr build time
+  significantly
+- Releases are rehearsed with every test and package build before their tag is pushed, so packagers
+  that build on a new tag get a release that has already built
+### Fixed
+- A daemon build test failed on aarch64 with glibc 2.43 and newer
+- The Fedora cargo_install macro installed a second build of the daemon that ignored `Cargo.lock`.
+  It now installs the binary from its build step
+
+
+# 2026.10.18 (CoolerControl v5.1.0)
 ### Added
 - Custom sensors for any channel metric: temperature, duty, RPM, frequency and power channels can
   now be a custom sensor's source, File sensors are read in their metric's unit, and a sensor's
