@@ -35,12 +35,6 @@ jobs:
         python3 .github/scripts/update_from_releases.py --source-type github --source-id SeaweedbrainCY/jellyfin-newsletter --xml Jellyfin-Newsletter.xml --last .last_release_jellyfin_newsletter
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-    - name: Run update script for Anchorr
-      run: |
-        python3 .github/scripts/update_from_releases.py --source-type github --source-id openVESSL/Anchorr --xml Anchorr.xml --last .last_release_anchorr
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Commit and push changes
       if: success()
