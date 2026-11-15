@@ -27,7 +27,44 @@ You may encounter issues setting up this container on Unraid versions below 7.0.
   <Config Name="CoolerControl IPv4 address" Target="CC_HOST_IP4" Default="0.0.0.0" Description="The IPv4 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
   <Config Name="CoolerControl IPv6 address" Target="CC_HOST_IP6" Default="::" Description="The IPv6 address that the container will expose CoolerControl on. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">::</Config>
   <Config Name="CoolerControl DBUS" Target="CC_DBUS" Default="OFF" Description="This tells CoolerControl you are running in Docker and it can ignore a DBUS error. You probably do not need to change this." Type="Variable" Display="advanced" Required="false" Mask="false">OFF</Config>
-  <Changes># 2026.10.19 (CoolerControl v5.1.1)
+  <Changes># 2026.11.15 (CoolerControl v5.1.2)
+### Added
+- Opt-in per-thread CPU frequency channels (#618)
+- AMD GPU overdrive setup shows its plan and progress, and can be disabled again
+- A plugin Rescan button, with a flag for plugins that need a daemon restart
+- Password reset commands for Docker and Podman in the forgotten password dialog
+- Docker images enable D-Bus when the host's system bus is mounted
+- OpenAPI operation IDs for generated API clients
+### Changed
+- On RDNA3/4 AMD GPUs, a Profile that never reaches 0% duty turns Zero RPM off
+- Leaving the Performance power profile waits 10 seconds before switching Modes (@caferen)
+- The daemon's device handling was refactored with lower CPU use and no io_uring (#606)
+- NVIDIA detection is skipped without an NVIDIA GPU, and always in musl builds (#495)
+- liquidctl devices that never answer at startup are dropped instead of left blank
+- The Logs page shows local times
+- Updated Simplified Chinese translation (!639, @zzj203947)
+### Removed
+- The plugin Reload button and endpoint, replaced by Rescan
+### Fixed
+- RDNA3/4 AMD GPU fans on newer firmware could stay stopped after Zero RPM was disabled
+- Fan settings from other programs, such as LACT, are no longer overwritten on unmanaged fans (#628)
+- AMD GPU overdrive setup supports more boot image tools and is refused in containers
+- The desktop app works with Qt WebEngine 6.140 and keeps fullscreen in sync (#633)
+- Time Average and EMA custom sensors no longer start from zero after a start or resume (#632)
+- The daemon no longer restarts on resume or stalls at shutdown on an unresponsive plugin (#629)
+- liquidctl devices keep direct access after liqctld restarts
+- Commands with large output no longer hang until their timeout
+- Saving plugin config works with `fs.protected_regular=2`, as on Ubuntu
+- Saving device settings from an older client no longer resets other settings
+- Fixed Profile speeds above 100% are rejected
+- A broken LCD Carousel image no longer stops the Carousel
+- Docker images can load libdrm for AMD GPUs
+- musl builds send cache headers for UI files
+- The OpenAPI spec matches what the daemon sends
+- Updated vulnerable dependencies (#626, #627, #630, #631)
+
+
+# 2026.10.19 (CoolerControl v5.1.1)
 ### Changed
 - More tests that depend on their build environment, such as the host, sandbox or toolchain, are
   gated behind the `gated-tests` feature in every daemon crate
