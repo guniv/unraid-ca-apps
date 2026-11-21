@@ -17,7 +17,39 @@ It is fully customizable and can be run on a schedule using a cron job or a task
   <Config Name="Time zone" Target="TZ" Default="America/New_York" Description="The time zone that will be used for the built in scheduler. See time zone examples here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
   <Config Name="User UID" Target="USER_UID" Default="1000" Description="The user ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
   <Config Name="Group GID" Target="GROUP_GID" Default="1000" Description="The group ID that the container will run Jellyfin Newsletter as." Type="Variable" Display="advanced" Required="true" Mask="false">1000</Config>
-  <Changes># 2026.09.30 (v2.0.0)
+  <Changes># 2026.11.21 (v2.0.1)
+## 🐳 New docker images 
+This release is available in the following tags : `2.0`, `2.0.1` and `latest`
+**Recommended tag :**
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:2.0`
+
+Exact tag :
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:2.0.1`
+
+Latest tag:
+- `ghcr.io/seaweedbraincy/jellyfin-newsletter:latest`
+
+
+## 🧰 What's fixed
+- Fix a bug causing empty folders to be detected as movies. Fix #178. PR #18 by @SeaweedbrainCY.
+- Fix a bug causing the images to use full width on Oultook desktop. Fix #179. PR #181 by @SeaweedbrainCY.
+
+## 🧽 Chore
+- Pin all cicd dependencies versions. PR #180 by @SeaweedbrainCY.
+- Add redaction tests for `config.Secret`. PR #173 by @Macawls.
+- bump go.opentelemetry.io/otel/exporters/otlp/otlptrace from 1.42.0 to 1.45.0. PR #177. 
+
+## 🌐 Current translation status
+*updated once a day*
+
+![Crowdin translation status](https://raw.githubusercontent.com/SeaweedbrainCY/jellyfin-newsletter/refs/heads/main/assets/crowdin-status.svg)
+
+## 👥 New Contributors
+* @Macawls made their first contribution in https://github.com/SeaweedbrainCY/jellyfin-newsletter/pull/173
+
+**Full Changelog**: https://github.com/SeaweedbrainCY/jellyfin-newsletter/compare/v2.0.0...v2.0.1
+
+# 2026.09.30 (v2.0.0)
 &gt; [!important]
 &gt; **This version is the 1st officially supporting Jellyfin 12.0**
 &gt;
